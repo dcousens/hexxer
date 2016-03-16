@@ -4,6 +4,9 @@
 [![Version](https://img.shields.io/npm/v/hexxer.svg)](https://www.npmjs.org/package/hexxer)
 
 A streaming hex encoding/decoding tool,  pipes `stdin` to `stdout`.
+
+Byte-for-byte, simple, **not UTF8 aware** (if that matters).
+
 Throws via `assert` on invalid characters (platform dependent, could be a SEGV).
 
 
