@@ -16,6 +16,9 @@ Decoding
 ``` bash
 > echo "6a" | hexxer -d
 j
+
+> echo "6b" | hexxer --decode
+k
 ```
 
 Encoding
