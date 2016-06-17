@@ -1,6 +1,6 @@
 # hexxer
 
-[![build status](https://secure.travis-ci.org/dcousens/hexxer.png)](http://travis-ci.org/dcousens/hexxer)
+[![build status](https://travis-ci.org/dcousens/hexxer.svg?branch=master)](http://travis-ci.org/dcousens/hexxer)
 [![Version](https://img.shields.io/npm/v/hexxer.svg)](https://www.npmjs.org/package/hexxer)
 
 A streaming hex encoding/decoding tool,  pipes `stdin` to `stdout`.
