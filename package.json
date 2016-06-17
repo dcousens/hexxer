@@ -23,6 +23,10 @@
   "bin": {
     "hexxer": "./hexxer"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dcousens/hexxer.git"
+  },
   "author": "Daniel Cousens",
   "license": "ISC"
 }
