@@ -20,8 +20,7 @@ int main (int argc, char** argv) {
 
 	// decode?
 	if (argc > 1) {
-		if (strncmp(argv[1], "-d", 2) != 0 &&
-			strncmp(argv[1], "--decode", 8) != 0) {
+		if (strncmp(argv[1], "-d", 2) != 0 && strncmp(argv[1], "--decode", 8) != 0) {
 			throw std::invalid_argument("Unknown argument");
 		}
 
