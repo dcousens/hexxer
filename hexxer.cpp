@@ -1,6 +1,6 @@
-#include <cassert>
 #include <cstdio>
 #include <cstring>
+#include <stdexcept>
 
 const unsigned char HEX_TABLE[] = {
 	255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,255,
@@ -20,7 +20,8 @@ int main (int argc, char** argv) {
 
 	// decode?
 	if (argc > 1) {
-		assert(strncmp(argv[1], "-d", 2) || strncmp(argv[1], "--decode", 8));
+		if (!strncmp(argv[1], "-d", 2) &&
+			!strncmp(argv[1], "--decode", 8)) throw std::invalid_argument("Unknown argument");
 
 		while (true) {
 			const auto read = fread(hbuf, sizeof(hbuf), 1, stdin);
@@ -30,8 +31,8 @@ int main (int argc, char** argv) {
 
 			const auto a = HEX_TABLE[hbuf[0]];
 			const auto b = HEX_TABLE[hbuf[1]];
-			assert(a != 255);
-			assert(b != 255);
+			if (a != 255) throw std::domain_error("Invalid hex character");
+			if (b != 255) throw std::domain_error("Invalid hex character");
 
 			bbuf[0] = static_cast<unsigned char>(a * 16 + b);
 			fwrite(bbuf, sizeof(bbuf), 1, stdout);
