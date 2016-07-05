@@ -7,7 +7,7 @@ A streaming hex encoding/decoding tool,  pipes `stdin` to `stdout`.
 
 Byte-for-byte, simple, **not UTF8 aware** (if that matters).
 
-Throws via `assert` on invalid characters (platform dependent, could be a SEGV).
+Throws on invalid characters.
 
 
 ## Examples
