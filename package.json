@@ -1,6 +1,6 @@
 {
   "name": "hexxer",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A streaming hex encoding/decoding tool, pipes stdin to stdout",
   "scripts": {
     "preinstall": "make"
