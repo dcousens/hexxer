@@ -32,8 +32,8 @@ int main (int argc, char** argv) {
 
 			const auto a = HEX_TABLE[hbuf[0]];
 			const auto b = HEX_TABLE[hbuf[1]];
-			if (a != 255) throw std::domain_error("Invalid hex character");
-			if (b != 255) throw std::domain_error("Invalid hex character");
+			if (a == 255) throw std::domain_error("Invalid hex character");
+			if (b == 255) throw std::domain_error("Invalid hex character");
 
 			bbuf[0] = static_cast<unsigned char>(a * 16 + b);
 			fwrite(bbuf, sizeof(bbuf), 1, stdout);
