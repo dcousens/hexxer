@@ -12,18 +12,18 @@ static const char HEX_ALPHABET[] = "0123456789abcdef";
 
 // destination needs atleast length/2 bytes
 inline int hex_decode (unsigned char* destination, const char* source, const size_t length) {
-	if (length % 2 != 0) return 1;
+	if (length % 2 != 0) return 0;
 
 	for (size_t i = 0; i < length; i += 2) {
 		const unsigned char a = HEX_TABLE[static_cast<unsigned char>(source[i])];
 		const unsigned char b = HEX_TABLE[static_cast<unsigned char>(source[i + 1])];
-		if (a == 255) return 1;
-		if (b == 255) return 1;
+		if (a == 255) return 0;
+		if (b == 255) return 0;
 
 		destination[i >> 1] = static_cast<unsigned char>((a << 4) + b);
 	}
 
-	return 0;
+	return 1;
 }
 
 // destination needs atleast length*2 bytes
@@ -37,5 +37,5 @@ inline int hex_encode (char* destination, const unsigned char* source, const siz
 		destination[(i << 1) + 1] = HEX_ALPHABET[b];
 	}
 
-	return 0;
+	return 1;
 }
