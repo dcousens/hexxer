@@ -29,3 +29,5 @@ Encoding
 > echo -n "j" | hexxer
 6a
 ```
+
+## LICENSE [ISC](LICENSE)

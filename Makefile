@@ -1,9 +1,11 @@
-W=-pedantic -std=c++14 -W -Wall -Wconversion -Wextra -Wfatal-errors -Wwrite-strings -Wno-unused-variable -Wno-unused-parameter
+CXX=g++
+CFLAGS=-std=c++14 -pedantic -W -Wall -Wconversion -Wextra -Wfatal-errors -Wwrite-strings -Wno-unused-variable -Wno-unused-parameter
+OFLAGS=-O3
 
 all: hexxer
 
 hexxer: hexxer.cpp
-	g++ $W -O3 $< -std=c++14 -o $@
+	$(CXX) $(CFLAGS) $(OFLAGS) $< -o $@
 
 clean:
-	rm -f hexxer
+	rm hexxer
