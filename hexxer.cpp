@@ -2,7 +2,7 @@
 #include <cstring>
 #include <stdexcept>
 
-#include "hexxer.h"
+#include "hexxer.hpp"
 
 int main (int argc, char** argv) {
 	char hbuf[2] = {};
