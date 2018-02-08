@@ -1,4 +1,3 @@
-CXX=g++
 CFLAGS=-std=c++14 -pedantic -W -Wall -Wconversion -Wextra -Wfatal-errors -Wwrite-strings -Wno-unused-variable -Wno-unused-parameter
 OFLAGS=-O3
 
