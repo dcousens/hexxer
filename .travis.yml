@@ -1,2 +1,3 @@
 sudo: false
-script: Make test
+language: cpp
+script: make && make test
