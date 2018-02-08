@@ -7,5 +7,8 @@ all: hexxer
 hexxer: hexxer.cpp
 	$(CXX) $(CFLAGS) $(OFLAGS) $< -o $@
 
+test: hexxer
+	cd test && ./hexxer.sh
+
 clean:
 	rm hexxer

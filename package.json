@@ -3,7 +3,8 @@
   "version": "1.1.1",
   "description": "A streaming hex encoding/decoding tool, pipes stdin to stdout",
   "scripts": {
-    "preinstall": "make"
+    "preinstall": "make",
+    "test": "make test"
   },
   "keywords": [
     "base16",

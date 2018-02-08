@@ -22,7 +22,7 @@ auto encode () {
 			out[(i << 1) + 1] = hexxer::encodeSecond(byte);
 		}
 
-		if (!fwrite(out.data(), read * 2, 1, stdout)) return 1;
+		if (!fwrite(out.data(), read << 1, 1, stdout)) return 1;
 	}
 
 	return 0;
@@ -48,7 +48,7 @@ auto decode () {
 			out[i >> 1] = static_cast<unsigned char>(byte);
 		}
 
-		if (!fwrite(out.data(), read, 1, stdout)) return 1;
+		if (!fwrite(out.data(), read >> 1, 1, stdout)) return 1;
 	}
 
 	return 0;
