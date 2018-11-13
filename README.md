@@ -30,4 +30,4 @@ Encoding
 6a
 ```
 
-## LICENSE [ISC](LICENSE)
+## LICENSE [MIT](LICENSE)
