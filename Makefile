@@ -11,3 +11,8 @@ test: hexxer
 
 clean:
 	rm hexxer
+
+install: hexxer
+	@mkdir -p ${DESTDIR}${PREFIX}/bin
+	@cp -f hexxer ${DESTDIR}${PREFIX}/bin
+	@chmod 755 ${DESTDIR}${PREFIX}/bin/hexxer
