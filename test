@@ -1,0 +1,43 @@
+#!/bin/bash -e
+
+while read -r line; do
+	hex=$(echo "$line" | cut -f1)
+	sha1=$(echo "$line" | cut -f2)
+	ahex=$(echo -n "$hex" | ./hexxer -d | ./hexxer)
+	asha1=$(echo -n "$hex" | ./hexxer -d | sha1sum | cut -c-40)
+
+	if [[ "$asha1" != "$sha1" ]]; then
+		echo -n "failed '$hex', expected SHA1 $sha1, actual SHA1 $asha1"
+		exit 1
+	fi
+
+	if [[ "$ahex" != "$hex" ]]; then
+		echo -n "failed '$hex', expected hex $hex, actual hex $ahex"
+		exit 1
+	fi
+
+	text=$(echo "$line" | cut -f3)
+	if test -n "$text"; then
+		ahex2=$(echo -e "$text" | ./hexxer)
+		atext=$(echo -n "$hex" | ./hexxer -d)
+
+		if [[ "$atext" != "$text" ]]; then
+			echo -ne "failed '$hex', expected text $text, actual text $atext"
+			exit 1
+		fi
+
+		if [[ "$ahex2" != "$hex" ]]; then
+			echo -ne "failed '$hex', expected hex $hex, actual hex $ahex2"
+			exit 1
+		fi
+	fi
+
+	echo "passed '$hex'"
+done << LIST
+666f6f6261720a	988881adc9fc3655077dc2d4d757d480b5ea0e11	foobar
+64636f7573656e730a	adc990a7b7d7b063f1a5a36d771fcf433eba3ee1	dcousens
+e79b8ad22b34a54be999f4eadde2ee895c208d4b3d83f1954b61255d2556a8b73773c0dc0210aa044ffcca6834839460959cbc9f73d3079262fc8bc935d46262	a2fcf7452d07b662dc00114a1037d296769e65fd
+666f6f6261720a202064636f7573656e730a	26d039521bdde62585f56c4a97711b17de9c1465
+LIST
+# echo 'foobar' | sha512sum -> e79b8ad...
+# echo -e 'foobar\n  dcousens' -> 666f6f6261720a202064636f7573656e730a
