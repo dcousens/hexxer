@@ -4,6 +4,9 @@ OFLAGS=-O3
 hexxer: hexxer.cpp
 	$(CXX) $(CFLAGS) $(OFLAGS) $< -o $@
 
+clean:
+	rm hexxer
+
 install: hexxer
 	@mkdir -p ${DESTDIR}${PREFIX}/bin
 	@cp -f hexxer ${DESTDIR}${PREFIX}/bin
