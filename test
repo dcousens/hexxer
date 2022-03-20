@@ -1,8 +1,8 @@
 #!/bin/bash -e
 
 while read -r line; do
-	hex=$(echo "$line" | cut -f1)
-	sha1=$(echo "$line" | cut -f2)
+	hex=$(cut -f1 <<< "$line")
+	sha1=$(cut -f2 <<< "$line")
 	ahex=$(echo -n "$hex" | ./hexxer -d | ./hexxer)
 	asha1=$(echo -n "$hex" | ./hexxer -d | sha1sum | cut -c-40)
 
@@ -18,7 +18,7 @@ while read -r line; do
 
 	text=$(echo "$line" | cut -f3)
 	if test -n "$text"; then
-		ahex2=$(echo -e "$text" | ./hexxer)
+		ahex2=$(./hexxer <<< "$text")
 		atext=$(echo -n "$hex" | ./hexxer -d)
 
 		if [[ "$atext" != "$text" ]]; then
@@ -39,5 +39,3 @@ done << LIST
 e79b8ad22b34a54be999f4eadde2ee895c208d4b3d83f1954b61255d2556a8b73773c0dc0210aa044ffcca6834839460959cbc9f73d3079262fc8bc935d46262	a2fcf7452d07b662dc00114a1037d296769e65fd
 666f6f6261720a202064636f7573656e730a	26d039521bdde62585f56c4a97711b17de9c1465
 LIST
-# echo 'foobar' | sha512sum -> e79b8ad...
-# echo -e 'foobar\n  dcousens' -> 666f6f6261720a202064636f7573656e730a
