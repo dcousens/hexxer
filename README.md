@@ -3,7 +3,7 @@ A streaming hex encoding/decoding tool,  pipes `stdin` to `stdout`.
 
 Byte-for-byte, simple, **not UTF8 aware** (if that matters).
 
-Throws on invalid characters.
+Throws on invalid characters unless `--decode-any` is used.
 
 
 ## Examples
