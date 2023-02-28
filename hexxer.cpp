@@ -28,27 +28,33 @@ auto encode () {
 	return 0;
 }
 
-auto decode () {
+auto decode (bool const strict = false) {
 	std::array<char, MAX_WRITE_OUT * 2> in;
 	std::array<unsigned char, MAX_WRITE_OUT> out;
 
 	while (true) {
 		// read until EOF
-		const auto read = fread(in.data(), 1, in.size(), stdin);
+		auto const read = fread(in.data(), 1, in.size(), stdin);
 		if (!read) break;
-		if (read % 2 != 0) throw std::domain_error("Odd number of characters");
 
-		for (size_t i = 0; i < read; i += 2) {
+		auto const read2 = read - (read % 2);
+		for (size_t i = 0; i < read2;) {
 			const auto a = in[i];
 			const auto b = in[i + 1];
 
 			const auto byte = hexxer::decode(a, b);
-			if (byte > 0xff) throw std::domain_error("Invalid hex character");
+			if (byte >= 0x100) {
+				if (strict) return 3;
+				if (byte == 0x101) i += 2;
+				if (byte == 0x100) i += 1;
+				continue;
+			}
 
 			out[i >> 1] = static_cast<unsigned char>(byte);
+			i += 2;
 		}
 
-		if (!fwrite(out.data(), read >> 1, 1, stdout)) return 1;
+		if (!fwrite(out.data(), read2 >> 1, 1, stdout)) return 1;
 	}
 
 	return 0;
@@ -56,11 +62,15 @@ auto decode () {
 
 int main (int argc, char** argv) {
 	if (argc > 1) {
-		if (strncmp(argv[1], "-d", 2) != 0 && strncmp(argv[1], "--decode", 8) != 0) {
-			throw std::invalid_argument("Unknown argument");
+		if (not (strncmp(argv[1], "-d", 2) == 0 or strncmp(argv[1], "--decode", 8) == 0)) {
+			throw std::invalid_argument("unknown argument");
 		}
 
-		return decode();
+		auto const strict = not ((strncmp(argv[1], "-da", 3) == 0) or (strncmp(argv[1], "--decode-any", 12) == 0));
+		auto const error = decode(strict);
+		if (error == 2) throw std::domain_error("odd number of characters");
+		if (error == 3) throw std::domain_error("invalid hex character");
+		return error;
 	}
 
 	return encode();

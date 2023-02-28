@@ -47,7 +47,7 @@ namespace hexxer {
 		auto const ia = HEX_TABLE[static_cast<unsigned char>(a)];
 		auto const ib = HEX_TABLE[static_cast<unsigned char>(b)];
 		if (ia == 255) return 0x100;
-		if (ib == 255) return 0x100;
+		if (ib == 255) return 0x101;
 
 		return (ia << 4) + ib;
 	}
