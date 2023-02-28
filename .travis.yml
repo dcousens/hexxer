@@ -1,4 +1,0 @@
-sudo: false
-compiler: clang
-language: cpp
-script: make && make test
