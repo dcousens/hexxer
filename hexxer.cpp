@@ -13,11 +13,11 @@ auto encode () {
 
 	while (true) {
 		// read until EOF
-		const auto read = fread(in.data(), 1, in.size(), stdin);
+		auto const read = fread(in.data(), 1, in.size(), stdin);
 		if (read == 0) break;
 
 		for (size_t i = 0; i < read; ++i) {
-			const auto byte = in[i];
+			auto const byte = in[i];
 			out[i << 1] = hexxer::encodeFirst(byte);
 			out[(i << 1) + 1] = hexxer::encodeSecond(byte);
 		}
@@ -39,10 +39,10 @@ auto decode (bool const strict = false) {
 
 		auto const read2 = read - (read % 2);
 		for (size_t i = 0; i < read2;) {
-			const auto a = in[i];
-			const auto b = in[i + 1];
+			auto const a = in[i];
+			auto const b = in[i + 1];
 
-			const auto byte = hexxer::decode(a, b);
+			auto const byte = hexxer::decode(a, b);
 			if (byte >= 0x100) {
 				if (strict) return 3;
 				if (byte == 0x101) i += 2;
