@@ -1,4 +1,4 @@
-# deprecated, use `basenec --base16 -w0` from [`coreutils`](https://github.com/coreutils/coreutils/blob/master/src/basenc.c)
+# deprecated, use `basenc --base16 -w0` from [`coreutils`](https://github.com/coreutils/coreutils/blob/master/src/basenc.c)
 
 ---
 
