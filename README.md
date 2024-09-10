@@ -1,3 +1,7 @@
+# deprecated, use `basenec --base16 -w0` from [`coreutils`](https://github.com/coreutils/coreutils/blob/master/src/basenc.c)
+
+---
+
 # hexxer
 A streaming hex encoding/decoding tool,  pipes `stdin` to `stdout`.
 
